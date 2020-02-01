@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+
+let lphm = require('./index')
+var argv = require('minimist')(process.argv.slice(2), {
+  default: {
+    'mqtt-url': 'mqtt://localhost/',
+    'lutron-port': 23,
+    'topic-prefix': 'lutron/1'
+  }
+});
+
+if (!argv['lutron-host']) {
+  console.warn(`
+  Usage:
+    $ lutron-pro-hub-mqtt <options>
+      --mqtt-url <url> URL for MQTT broker (default: mqtt://localhost/)
+      --lutron-host <hostname> Hostname or IP for Lutron Hub
+      --lutron-port <port> Port for Lutron Hub (default: 23)
+      --topic-prefix <string> Prefix for all emitted topics (default: 'lutron/1')`);
+  process.exit(0);
+}
+
+lphm.start(
+  argv['mqtt-url'],
+  argv['lutron-host'],
+  argv['lutron-port'],
+  argv['topic-prefix']
+)
