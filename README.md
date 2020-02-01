@@ -30,7 +30,7 @@ Details on the protocol are at: https://www.lutron.com/technicaldocumentlibrary/
 ## Running
 
 ```
-$ docker run -it --rm --init lutron-pro-hub-mqtt:latest --mqtt-url mqtt://mosquitto/ --lutron-host 192.168.10.101
+$ docker run -it --rm --init zwily/lutron-pro-hub-mqtt:latest --mqtt-url mqtt://mosquitto/ --lutron-host 192.168.10.101
 ```
 
 Available options are:
