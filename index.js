@@ -18,8 +18,8 @@ function start(mqtt_url, lutron_host, lutron_port, topic_prefix) {
 
   mqtt_client.on("message", (topic, message) => {
     if (topic === `${topic_prefix}/send`) {
-      console.log("sending > ", message);
-      lutron_client.send(message);
+      console.log("sending > ", message.toString());
+      lutron_client.send(message.toString());
     }
   });
   mqtt_client.subscribe(`${topic_prefix}/send`);
