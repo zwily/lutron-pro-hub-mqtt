@@ -1,6 +1,6 @@
 {
   "name": "lutron-pro-hub-mqtt",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Connects the Lutron Pro Hub (Caseta or RA2 Select) with an MQTT broker.",
   "main": "index.js",
   "scripts": {
