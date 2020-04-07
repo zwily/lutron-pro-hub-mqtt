@@ -3,7 +3,7 @@ const { EventEmitter } = require("events");
 
 const ConnectionState = {
   AWAITING_LOGIN: 1,
-  LOGGED_IN: 2
+  LOGGED_IN: 2,
 };
 
 // TODO: make this a state machine (xstate?)
@@ -37,7 +37,7 @@ class LutronConnection extends EventEmitter {
       connectInterval = null;
     });
 
-    this.socket.on("error", err => {
+    this.socket.on("error", (err) => {
       console.log("lutron socket error: ", err);
       reconnect();
     });
@@ -52,7 +52,7 @@ class LutronConnection extends EventEmitter {
     const lines = data
       .toString()
       .split("\r\n")
-      .filter(l => l != "");
+      .filter((l) => l != "");
     for (let line of lines) {
       switch (this.state) {
         case ConnectionState.AWAITING_LOGIN:
@@ -65,10 +65,8 @@ class LutronConnection extends EventEmitter {
           }
           break;
         case ConnectionState.LOGGED_IN:
-          const args = line.split(",");
-          if (args[0][0] === "~") {
-            const command = args[0].replace("~", "");
-            this.emit("event", command, args[1], args.slice(2));
+          if (line[0] === "~") {
+            this.emit("event", line);
           }
           break;
       }
