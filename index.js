@@ -8,7 +8,7 @@ function start(mqtt_url, lutron_host, lutron_port, topic_prefix) {
     const components = event.split(",");
 
     mqtt_client.publish(
-      `${topic_prefix}/${event}`,
+      `${topic_prefix}/${components.join("/")}`,
       JSON.stringify({
         command: components[0],
         id: components[1],
